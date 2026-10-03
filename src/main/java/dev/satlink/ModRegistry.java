@@ -1,5 +1,6 @@
 package dev.satlink;
 
+import dev.satlink.compat.create.CreateBridge;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -60,13 +61,21 @@ public final class ModRegistry {
     public static final Supplier<BlockEntityType<StationBlockEntity>> STATION_BE =
             BLOCK_ENTITIES.register("ground_station",
                     () -> BlockEntityType.Builder.of(StationBlockEntity::new, STATION.get()).build(null));
+
     public static final Supplier<BlockEntityType<SolarPanelBlockEntity>> SOLAR_BE =
             BLOCK_ENTITIES.register("solar_panel",
-                    () -> BlockEntityType.Builder.of(SolarPanelBlockEntity::new,
+                    () -> BlockEntityType.Builder.<SolarPanelBlockEntity>of(
+                            (pos, state) -> CreateCompat.isCreateLoaded()
+                                    ? CreateBridge.solar(pos, state)
+                                    : new SolarPanelBlockEntity(pos, state),
                             SOLAR.get(), SOLAR_MIDDLE.get()).build(null));
+
     public static final Supplier<BlockEntityType<EnergyStorageBlockEntity>> STORAGE_BE =
             BLOCK_ENTITIES.register("energy_storage",
-                    () -> BlockEntityType.Builder.of(EnergyStorageBlockEntity::new,
+                    () -> BlockEntityType.Builder.<EnergyStorageBlockEntity>of(
+                            (pos, state) -> CreateCompat.isCreateLoaded()
+                                    ? CreateBridge.storage(pos, state)
+                                    : new EnergyStorageBlockEntity(pos, state),
                             STORAGE.get()).build(null));
 
     public static final Supplier<CreativeModeTab> MAIN_TAB = TABS.register("main",

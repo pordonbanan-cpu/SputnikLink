@@ -23,6 +23,11 @@ neoForge {
 
 repositories {
     mavenCentral()
+    maven { url = 'https://maven.createmod.net' }
+}
+
+dependencies {
+    compileOnly("com.simibubi.create:create-1.21.1:6.0.10-280:slim") { transitive = false }
 }
 
 processResources {

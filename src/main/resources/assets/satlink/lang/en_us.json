@@ -8,5 +8,13 @@
   "message.satlink.channel": "Channel: %s",
   "message.satlink.status": "Channel %s | dishes: %s | signal: %s/15",
   "tooltip.satlink.dish": "More dishes on the same channel = stronger signal. Right-click: next channel.",
-  "tooltip.satlink.ground_station": "Shows signal on a channel. Outputs signal to comparators."
+  "tooltip.satlink.ground_station": "Shows signal on a channel. Outputs signal to comparators.",
+  "goggles.satlink.solar_title": "Solar Panel",
+  "goggles.satlink.storage_title": "Energy Storage",
+  "goggles.satlink.generation": "Generation: %s FE/t",
+  "goggles.satlink.buffer": "Buffer: %s / %s FE",
+  "goggles.satlink.income": "Income: %s FE/t",
+  "goggles.satlink.panels": "Connected panels: %s",
+  "goggles.satlink.active": "Status: generating",
+  "goggles.satlink.idle": "Status: idle"
 }

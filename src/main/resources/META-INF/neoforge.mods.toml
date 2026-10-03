@@ -8,6 +8,7 @@ version = "${mod_version}"
 displayName = "SatLink"
 description = '''
 Satellite dish, ground station, solar panels and energy storage.
+Create optional (goggles show panel/storage energy).
 '''
 
 [[dependencies.satlink]]
@@ -22,4 +23,11 @@ modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.satlink]]
+modId = "create"
+type = "optional"
+versionRange = "[6.0.0,)"
+ordering = "AFTER"
 side = "BOTH"

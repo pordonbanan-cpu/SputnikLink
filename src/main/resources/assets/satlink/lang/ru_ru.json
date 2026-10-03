@@ -8,5 +8,13 @@
   "message.satlink.channel": "Канал: %s",
   "message.satlink.status": "Канал %s | антенн: %s | сигнал: %s/15",
   "tooltip.satlink.dish": "Больше антенн на одном канале — сильнее сигнал. ПКМ: следующий канал.",
-  "tooltip.satlink.ground_station": "Показывает сигнал на канале. Отдаёт сигнал компаратору."
+  "tooltip.satlink.ground_station": "Показывает сигнал на канале. Отдаёт сигнал компаратору.",
+  "goggles.satlink.solar_title": "Солнечная панель",
+  "goggles.satlink.storage_title": "Хранилище энергии",
+  "goggles.satlink.generation": "Генерация: %s FE/тик",
+  "goggles.satlink.buffer": "Буфер: %s / %s FE",
+  "goggles.satlink.income": "Приход: %s FE/тик",
+  "goggles.satlink.panels": "Подключено панелей: %s",
+  "goggles.satlink.active": "Статус: генерирует",
+  "goggles.satlink.idle": "Статус: простаивает"
 }

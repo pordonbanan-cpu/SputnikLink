@@ -1,6 +1,7 @@
 package dev.satlink;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -24,30 +25,26 @@ public class SolarPanelBlockEntity extends BlockEntity {
         super(ModRegistry.SOLAR_BE.get(), pos, state);
     }
 
-    public int getEnergy() {
-        return energy;
-    }
-
-    public int getGenerationPerTick() {
-        return active ? GENERATION_PER_TICK : 0;
-    }
+    public int getEnergy() { return energy; }
+    public int getGenerationPerTick() { return active ? GENERATION_PER_TICK : 0; }
+    public boolean isActive() { return active; }
 
     public int extractEnergy(int amount, boolean simulate) {
         int out = Math.max(0, Math.min(amount, energy));
-        if (!simulate && out > 0) {
-            energy -= out;
-            setChanged();
-        }
+        if (!simulate && out > 0) { energy -= out; setChanged(); }
         return out;
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SolarPanelBlockEntity be) {
         long time = level.getGameTime();
         if (time % 20L == 0L) {
-            be.active = level.isDay()
-                    && level.canSeeSky(pos.above())
-                    && !level.isRainingAt(pos.above())
-                    && !level.isThundering();
+            Direction attach = state.hasProperty(SolarPanelBlock.FACING)
+                    ? state.getValue(SolarPanelBlock.FACING) : Direction.DOWN;
+            Direction outward = attach.getOpposite();
+            BlockPos checkPos = pos.relative(outward);
+            boolean sky = level.canSeeSky(pos) || level.canSeeSky(checkPos);
+            boolean rain = level.isRainingAt(pos) || level.isRainingAt(pos.above());
+            be.active = level.isDay() && sky && !rain && !level.isThundering();
         }
         if (be.active && be.energy < BUFFER) {
             be.energy = Math.min(BUFFER, be.energy + GENERATION_PER_TICK);
