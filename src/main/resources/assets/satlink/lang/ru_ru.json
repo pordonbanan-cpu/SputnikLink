@@ -1,12 +1,12 @@
 {
+  "itemGroup.satlink": "SatLink",
   "block.satlink.dish": "Спутниковая антенна",
   "block.satlink.ground_station": "Наземная станция",
+  "block.satlink.solar_panel": "Солнечная панель",
+  "block.satlink.solar_panel_middle": "Солнечная панель (по центру)",
+  "block.satlink.energy_storage": "Хранилище энергии",
   "message.satlink.channel": "Канал: %s",
-  "message.satlink.status": "Канал %s | антенн: %s | сигнал: %s/15 | забрано чипов: %s",
-  "item.satlink.data_chip": "Чип данных",
-  "item.satlink.telemetry_pad": "Телеметрический планшет",
-  "itemGroup.satlink": "Sputnik Link",
+  "message.satlink.status": "Канал %s | антенн: %s | сигнал: %s/15",
   "tooltip.satlink.dish": "Больше антенн на одном канале — сильнее сигнал. ПКМ: следующий канал.",
-  "tooltip.satlink.ground_station": "Показывает сигнал, выдаёт чипы данных. Отдаёт сигнал компаратору.",
-  "tooltip.satlink.telemetry_pad": "ПКМ: показать статус сети SatLink."
+  "tooltip.satlink.ground_station": "Показывает сигнал на канале. Отдаёт сигнал компаратору."
 }
