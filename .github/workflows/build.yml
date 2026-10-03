@@ -1,0 +1,45 @@
+name: Build
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Decode textures
+        run: |
+          mkdir -p src/main/resources/assets/satlink/textures/block
+          python3 << 'PY'
+          import base64, pathlib
+          textures = {
+            "dish_side.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcklEQVR4nGOMT8n7z0ABYGFgYGAwt7DAKvn82TMGBgYGBkkpKazyJ0+cYGCCcZYtWUS0rchq4QZExcQRbQCyWiY86ogCA28ACwMDIrRxAXzy1HEBrngmlA4ePXo0CAKRegYMWFJmYWCA5Cp84NGjRzjlAK37JLDsy+UoAAAAAElFTkSuQmCC",
+            "dish_top.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAuElEQVR4nGOMT8n7z0ABYEEXyMzMxKth+vTpKHwmXJolxUVQMC4LmNAl0DWgG4huCBO6Zhi4++ApCkY2CFkPiheQNRMjhmIAzGRkhRoVSQwaFUkYhiC7FKsLYJqxsXG6gFyA04AbHfOwstEBPCE9f/mGQVJchEFZQRruV3SNygrScLV4XQBTSEiMgYGBgRGWF7ClBWwAZjssScNdABN4/vINihORNaJrxvACsgRMA7qB6JmJkdLsDADm2mAgTLKStAAAAABJRU5ErkJggg==",
+            "station_side.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYElEQVR4nGOUU9L6z0ABYGFgYGAQk5AhS/OrF08YmCixnYGBYbAZwLFIgyQ2AwMDA6Ocktb/AQ1EFhhDTUOXJI23blxGNQAmQCpADcS0VSSxGRgGQyAOvAEsDAwQv5ALAJpZHURJTXspAAAAAElFTkSuQmCC",
+            "station_top.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAZ0lEQVR4nGMUcTP4z0ABYGFgYGDg0hCDC8gZyTE8OvcIRREusRvLzjAwEaMQnxgTJZrhBpCrmYEBGgboglsyRRgYGL4x+JzDL4biBWRbSBFjweZEZFvwiaG4YDQQUZ04tAKRkdLsDABUDnZfeyCnWwAAAABJRU5ErkJggg==",
+          }
+          base = pathlib.Path("src/main/resources/assets/satlink/textures/block")
+          for name, b64 in textures.items():
+              (base / name).write_bytes(base64.b64decode(b64.strip()))
+              print("wrote", name, (base/name).stat().st_size)
+          PY
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.12"
+
+      - name: Build
+        run: gradle build --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sputnik-link-jar
+          path: build/libs/*.jar
