@@ -14,10 +14,16 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
+
 public class EnergyStorageBlockEntity extends BlockEntity {
     public static final int BASE_BUFFER = 100_000;
     public static final int PER_PANEL_BONUS = 10_000;
     public static final int MAX_PUSH = 2_000;
+    public static final int MAX_NETWORK = 256;
 
     private int energy = 0;
     private int panelCount = 0;
@@ -54,14 +60,35 @@ public class EnergyStorageBlockEntity extends BlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, EnergyStorageBlockEntity be) {
-        int panels = 0;
-        int pulled = 0;
+        Set<BlockPos> visited = new HashSet<>();
+        Queue<BlockPos> queue = new ArrayDeque<>();
+
         for (Direction dir : Direction.values()) {
-            if (level.getBlockEntity(pos.relative(dir)) instanceof SolarPanelBlockEntity panel) {
-                panels++;
-                pulled += panel.extractEnergy(SolarPanelBlockEntity.BUFFER, false);
+            BlockPos np = pos.relative(dir);
+            if (level.getBlockEntity(np) instanceof SolarPanelBlockEntity) {
+                queue.add(np);
             }
         }
+
+        int panels = 0;
+        int pulled = 0;
+
+        while (!queue.isEmpty() && panels < MAX_NETWORK) {
+            BlockPos cur = queue.poll();
+            if (!visited.add(cur)) continue;
+            if (!(level.getBlockEntity(cur) instanceof SolarPanelBlockEntity panel)) continue;
+
+            panels++;
+            pulled += panel.extractEnergy(SolarPanelBlockEntity.BUFFER, false);
+
+            for (Direction dir : Direction.values()) {
+                BlockPos np = cur.relative(dir);
+                if (!visited.contains(np) && level.getBlockEntity(np) instanceof SolarPanelBlockEntity) {
+                    queue.add(np);
+                }
+            }
+        }
+
         be.panelCount = panels;
         be.income = pulled;
 
