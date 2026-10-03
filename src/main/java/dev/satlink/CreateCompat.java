@@ -1,20 +1,12 @@
 package dev.satlink;
 
-/**
- * Optional Create presence check. Used only to avoid hard dependency at runtime.
- */
-public final class CreateCompat {
-    public static final boolean PRESENT;
+import net.neoforged.fml.ModList;
 
-    static {
-        boolean present;
-        try {
-            Class.forName("com.simibubi.create.Create");
-            present = true;
-        } catch (ClassNotFoundException e) {
-            present = false;
-        }
-        PRESENT = present;
+/** Only place that asks if Create is loaded. Does NOT import Create. */
+public final class CreateCompat {
+    public static boolean isCreateLoaded() {
+        ModList list = ModList.get();
+        return list != null && list.isLoaded("create");
     }
 
     private CreateCompat() {}
