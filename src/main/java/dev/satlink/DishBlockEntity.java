@@ -18,14 +18,13 @@ public class DishBlockEntity extends BlockEntity {
         return channel;
     }
 
-    public void setChannel(int newChannel) {
+    public void setChannel(int c) {
         if (level != null && !level.isClientSide) {
-            GlobalPos gp = GlobalPos.of(level.dimension(), worldPosition);
-            SignalNetwork.remove(channel, gp);
-            channel = newChannel;
-            SignalNetwork.add(channel, gp);
-        } else {
-            channel = newChannel;
+            SignalNetwork.remove(channel, GlobalPos.of(level.dimension(), worldPosition));
+        }
+        channel = Math.max(1, Math.min(16, c));
+        if (level != null && !level.isClientSide) {
+            SignalNetwork.add(channel, GlobalPos.of(level.dimension(), worldPosition));
         }
         setChanged();
     }
