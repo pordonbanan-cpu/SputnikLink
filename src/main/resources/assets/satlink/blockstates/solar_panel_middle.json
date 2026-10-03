@@ -1,10 +1,10 @@
 {
   "variants": {
-    "facing=down":  { "model": "satlink:block/solar_panel_middle" },
-    "facing=up":    { "model": "satlink:block/solar_panel_middle", "x": 180 },
-    "facing=north": { "model": "satlink:block/solar_panel_middle", "x": 90 },
-    "facing=south": { "model": "satlink:block/solar_panel_middle", "x": 90, "y": 180 },
-    "facing=west":  { "model": "satlink:block/solar_panel_middle", "x": 90, "y": 270 },
-    "facing=east":  { "model": "satlink:block/solar_panel_middle", "x": 90, "y": 90 }
+    "facing=down":  { "model": "satlink:block/solar_panel_middle_down" },
+    "facing=up":    { "model": "satlink:block/solar_panel_middle_up" },
+    "facing=north": { "model": "satlink:block/solar_panel_middle_north" },
+    "facing=south": { "model": "satlink:block/solar_panel_middle_south" },
+    "facing=west":  { "model": "satlink:block/solar_panel_middle_west" },
+    "facing=east":  { "model": "satlink:block/solar_panel_middle_east" }
   }
 }
