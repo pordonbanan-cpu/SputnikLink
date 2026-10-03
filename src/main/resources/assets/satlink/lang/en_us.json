@@ -1,0 +1,6 @@
+{
+  "block.satlink.dish": "Satellite Dish",
+  "block.satlink.ground_station": "Ground Station",
+  "message.satlink.channel": "Channel: %s",
+  "message.satlink.status": "Channel %s | dishes: %s | signal: %s/15"
+}

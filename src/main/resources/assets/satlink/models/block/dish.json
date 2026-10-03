@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "satlink:block/dish_top",
+    "bottom": "satlink:block/dish_side",
+    "side": "satlink:block/dish_side"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "C": { "item": "minecraft:copper_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "G": { "item": "minecraft:gold_ingot" }
+  },
+  "pattern": [ "ICI", "GRG", "III" ],
+  "result": { "id": "satlink:ground_station", "count": 1 }
+}

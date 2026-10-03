@@ -1,0 +1,4 @@
+{
+  "replace": false,
+  "values": [ "satlink:dish", "satlink:ground_station" ]
+}

@@ -1,0 +1,6 @@
+{
+  "block.satlink.dish": "Sputnikovaya antenna",
+  "block.satlink.ground_station": "Nazemnaya stantsiya",
+  "message.satlink.channel": "Kanal: %s",
+  "message.satlink.status": "Kanal %s | antenn: %s | signal: %s/15"
+}
