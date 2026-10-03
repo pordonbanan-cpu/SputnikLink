@@ -2,5 +2,9 @@
   "block.satlink.dish": "Satellite Dish",
   "block.satlink.ground_station": "Ground Station",
   "message.satlink.channel": "Channel: %s",
-  "message.satlink.status": "Channel %s | dishes: %s | signal: %s/15"
+  "message.satlink.status": "Channel %s | dishes: %s | signal: %s/15 | chips collected: %s",
+  "item.satlink.data_chip": "Data Chip",
+  "itemGroup.satlink": "Sputnik Link",
+  "tooltip.satlink.dish": "More dishes on the same channel = stronger signal. Right-click: next channel.",
+  "tooltip.satlink.ground_station": "Shows signal, collects data chips. Outputs signal to comparators."
 }

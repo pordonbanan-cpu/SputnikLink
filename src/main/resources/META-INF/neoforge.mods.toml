@@ -8,9 +8,8 @@ version = "${mod_version}"
 displayName = "Sputnik Link"
 authors = "pisun"
 description = '''
-Satellite dish and ground station (Sputnik Link).
-More dishes on the same channel = stronger station signal.
-Works with normal blocks and Sable sub-levels.
+Satellite dish and ground station. More dishes on one channel = stronger signal.
+Stations collect data chips. Works with Sable sub-levels. Create copycat-compatible.
 '''
 
 [[dependencies.satlink]]

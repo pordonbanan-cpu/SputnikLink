@@ -5,7 +5,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import java.util.List;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,6 +29,12 @@ public class StationBlock extends BaseEntityBlock {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context,
+                                List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable("tooltip.satlink.ground_station"));
     }
 
     @Override
@@ -55,9 +65,16 @@ public class StationBlock extends BaseEntityBlock {
                 be.setChannel((be.getChannel() % max) + 1);
                 player.displayClientMessage(Component.translatable("message.satlink.channel", be.getChannel()), true);
             } else {
+                int taken = be.takeChips();
+                if (taken > 0) {
+                    ItemStack stack = new ItemStack(ModRegistry.DATA_CHIP.get(), taken);
+                    if (!player.getInventory().add(stack)) {
+                        player.drop(stack, false);
+                    }
+                }
                 int ch = be.getChannel();
                 player.displayClientMessage(Component.translatable("message.satlink.status",
-                        ch, SignalNetwork.count(ch), SignalNetwork.level(ch)), true);
+                        ch, SignalNetwork.count(ch), SignalNetwork.level(ch), taken), true);
             }
         }
         return InteractionResult.CONSUME;

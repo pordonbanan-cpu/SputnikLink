@@ -2,5 +2,9 @@
   "block.satlink.dish": "Спутниковая антенна",
   "block.satlink.ground_station": "Наземная станция",
   "message.satlink.channel": "Канал: %s",
-  "message.satlink.status": "Канал %s | антенн: %s | сигнал: %s/15"
+  "message.satlink.status": "Канал %s | антенн: %s | сигнал: %s/15 | забрано чипов: %s",
+  "item.satlink.data_chip": "Чип данных",
+  "itemGroup.satlink": "Sputnik Link",
+  "tooltip.satlink.dish": "Больше антенн на одном канале — сильнее сигнал. ПКМ: следующий канал.",
+  "tooltip.satlink.ground_station": "Показывает сигнал, выдаёт чипы данных. Отдаёт сигнал компаратору."
 }

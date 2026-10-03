@@ -5,8 +5,8 @@
     "I": { "item": "minecraft:iron_ingot" },
     "C": { "item": "minecraft:copper_ingot" },
     "R": { "item": "minecraft:redstone" },
-    "G": { "item": "minecraft:gold_ingot" }
+    "D": { "item": "minecraft:diamond" }
   },
-  "pattern": [ "ICI", "GRG", "III" ],
+  "pattern": [ "ICI", "RDR", "III" ],
   "result": { "id": "satlink:ground_station", "count": 1 }
 }
