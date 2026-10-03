@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone_block" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "pattern": [ "ICI", "RIR", "ICI" ],
+  "result": { "id": "satlink:energy_storage", "count": 1 }
+}

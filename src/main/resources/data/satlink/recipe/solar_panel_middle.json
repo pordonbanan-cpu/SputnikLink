@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [ { "item": "satlink:solar_panel" } ],
+  "result": { "id": "satlink:solar_panel_middle", "count": 1 }
+}

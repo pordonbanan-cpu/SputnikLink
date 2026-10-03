@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "L": { "item": "minecraft:lapis_lazuli" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "pattern": [ "GGG", "LLL", "III" ],
+  "result": { "id": "satlink:solar_panel", "count": 1 }
+}

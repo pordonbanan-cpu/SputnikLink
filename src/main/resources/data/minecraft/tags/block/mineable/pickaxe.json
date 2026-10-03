@@ -1,4 +1,1 @@
-{
-  "replace": false,
-  "values": [ "satlink:dish", "satlink:ground_station" ]
-}
+{ "replace": false, "values": [ "satlink:dish", "satlink:ground_station", "satlink:solar_panel", "satlink:solar_panel_middle", "satlink:energy_storage" ] }

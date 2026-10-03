@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "satlink:block/solar_panel" },
+    "facing=east":  { "model": "satlink:block/solar_panel", "y": 90 },
+    "facing=south": { "model": "satlink:block/solar_panel", "y": 180 },
+    "facing=west":  { "model": "satlink:block/solar_panel", "y": 270 }
+  }
+}

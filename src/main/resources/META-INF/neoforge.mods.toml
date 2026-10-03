@@ -5,11 +5,9 @@ license = "MIT"
 [[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
-displayName = "Sputnik Link"
-authors = "pisun"
+displayName = "SatLink"
 description = '''
-Satellite dish and ground station. More dishes on one channel = stronger signal.
-Stations collect data chips. Works with Sable sub-levels. Create copycat-compatible.
+Satellite dish, ground station, solar panels and energy storage.
 '''
 
 [[dependencies.satlink]]
