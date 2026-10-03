@@ -14,16 +14,10 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 neoForge {
     version = project.neo_version
-
     runs {
-        client {
-            client()
-        }
-        server {
-            server()
-        }
+        client { client() }
+        server { server() }
     }
-
     mods {
         "${mod_id}" {
             sourceSet(sourceSets.main)
