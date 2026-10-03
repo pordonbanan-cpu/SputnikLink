@@ -1,6 +1,9 @@
 package dev.satlink;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.SoundType;
@@ -18,6 +21,9 @@ public final class ModRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(SatLink.MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, SatLink.MODID);
+
+    public static final DeferredRegister<CreativeModeTab> TABS =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SatLink.MODID);
 
     private static BlockBehaviour.Properties props() {
         return BlockBehaviour.Properties.of()
@@ -37,12 +43,26 @@ public final class ModRegistry {
     public static final DeferredItem<BlockItem> STATION_ITEM =
             ITEMS.register("ground_station", () -> new BlockItem(STATION.get(), new Item.Properties()));
 
+    public static final DeferredItem<Item> DATA_CHIP =
+            ITEMS.register("data_chip", () -> new Item(new Item.Properties()));
+
     public static final Supplier<BlockEntityType<DishBlockEntity>> DISH_BE =
             BLOCK_ENTITIES.register("dish",
                     () -> BlockEntityType.Builder.of(DishBlockEntity::new, DISH.get()).build(null));
     public static final Supplier<BlockEntityType<StationBlockEntity>> STATION_BE =
             BLOCK_ENTITIES.register("ground_station",
                     () -> BlockEntityType.Builder.of(StationBlockEntity::new, STATION.get()).build(null));
+
+    public static final Supplier<CreativeModeTab> MAIN_TAB = TABS.register("main",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup.satlink"))
+                    .icon(() -> new ItemStack(DISH_ITEM.get()))
+                    .displayItems((params, output) -> {
+                        output.accept(DISH_ITEM.get());
+                        output.accept(STATION_ITEM.get());
+                        output.accept(DATA_CHIP.get());
+                    })
+                    .build());
 
     private ModRegistry() {}
 }

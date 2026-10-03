@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Signal network: channel -> set of loaded dishes.
- * Positions stored as GlobalPos (dimension + coords).
+ * GlobalPos works for overworld and Sable sub-levels.
  * Server-side only.
  */
 public final class SignalNetwork {
@@ -38,6 +38,16 @@ public final class SignalNetwork {
     /** Signal strength 0..15. */
     public static int level(int channel) {
         return Math.min(MAX_LEVEL, count(channel));
+    }
+
+    public static synchronized String summary() {
+        if (DISHES.isEmpty()) return "SatLink: no dishes";
+        StringBuilder sb = new StringBuilder("SatLink: ");
+        DISHES.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(e -> sb.append("ch ").append(e.getKey())
+                        .append(": ").append(e.getValue().size()).append(" dishes; "));
+        return sb.toString();
     }
 
     public static synchronized void clear() {
