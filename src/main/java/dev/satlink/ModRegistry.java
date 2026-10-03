@@ -46,6 +46,9 @@ public final class ModRegistry {
     public static final DeferredItem<Item> DATA_CHIP =
             ITEMS.register("data_chip", () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<TelemetryPadItem> TELEMETRY_PAD =
+            ITEMS.register("telemetry_pad", () -> new TelemetryPadItem(new Item.Properties().stacksTo(1)));
+
     public static final Supplier<BlockEntityType<DishBlockEntity>> DISH_BE =
             BLOCK_ENTITIES.register("dish",
                     () -> BlockEntityType.Builder.of(DishBlockEntity::new, DISH.get()).build(null));
@@ -61,6 +64,7 @@ public final class ModRegistry {
                         output.accept(DISH_ITEM.get());
                         output.accept(STATION_ITEM.get());
                         output.accept(DATA_CHIP.get());
+                        output.accept(TELEMETRY_PAD.get());
                     })
                     .build());
 

@@ -4,7 +4,9 @@
   "message.satlink.channel": "Channel: %s",
   "message.satlink.status": "Channel %s | dishes: %s | signal: %s/15 | chips collected: %s",
   "item.satlink.data_chip": "Data Chip",
+  "item.satlink.telemetry_pad": "Telemetry Pad",
   "itemGroup.satlink": "Sputnik Link",
   "tooltip.satlink.dish": "More dishes on the same channel = stronger signal. Right-click: next channel.",
-  "tooltip.satlink.ground_station": "Shows signal, collects data chips. Outputs signal to comparators."
+  "tooltip.satlink.ground_station": "Shows signal, collects data chips. Outputs signal to comparators.",
+  "tooltip.satlink.telemetry_pad": "Right-click: show live SatLink network status."
 }

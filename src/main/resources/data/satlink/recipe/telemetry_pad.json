@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": { "item": "satlink:data_chip" },
+    "P": { "item": "minecraft:paper" },
+    "U": { "item": "minecraft:copper_ingot" }
+  },
+  "pattern": [ "CCC", "CPC", "CUC" ],
+  "result": { "id": "satlink:telemetry_pad", "count": 1 }
+}
