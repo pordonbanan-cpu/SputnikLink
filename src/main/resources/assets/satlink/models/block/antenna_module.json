@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "satlink:block/antenna_module_top",
+    "bottom": "satlink:block/antenna_module_top",
+    "side": "satlink:block/antenna_module_side"
+  }
+}

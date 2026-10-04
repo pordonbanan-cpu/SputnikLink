@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "satlink:block/monitor" },
+    "facing=east":  { "model": "satlink:block/monitor", "y": 90 },
+    "facing=south": { "model": "satlink:block/monitor", "y": 180 },
+    "facing=west":  { "model": "satlink:block/monitor", "y": 270 }
+  }
+}
