@@ -19,6 +19,7 @@ public class SatLink {
         ModRegistry.ITEMS.register(modBus);
         ModRegistry.BLOCK_ENTITIES.register(modBus);
         ModRegistry.TABS.register(modBus);
+        ModRegistry.MENUS.register(modBus);
         modBus.addListener(this::registerCapabilities);
         NeoForge.EVENT_BUS.addListener(this::onServerStopped);
         NeoForge.EVENT_BUS.addListener(this::onCommands);
@@ -31,6 +32,7 @@ public class SatLink {
 
     private void onServerStopped(ServerStoppedEvent event) {
         SignalNetwork.clear();
+        LinkCableItem.clear();
     }
 
     private void onCommands(RegisterCommandsEvent event) {
