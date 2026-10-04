@@ -1,1 +1,41 @@
-PLACEHOLDER2
+name: Build
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Restore sources from payload
+        run: |
+          python3 << 'PY'
+          import base64, pathlib, tarfile, io, os
+          parts = sorted(pathlib.Path(".").glob("payload_part*.txt"))
+          if not parts:
+              print("No payload, using checked-out tree")
+          else:
+              b64 = "".join(p.read_text().strip() for p in parts)
+              data = base64.b64decode(b64)
+              with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
+                  tar.extractall(".")
+              print("Extracted", len(data), "bytes from", len(parts), "parts")
+          PY
+          pip install pillow -q
+          python3 tools/gen_textures.py
+          ls -la src/main/resources/assets/satlink/textures/block/ | head
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.12"
+      - name: Build
+        run: gradle build --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: satlink-0.4.0
+          path: build/libs/*.jar
