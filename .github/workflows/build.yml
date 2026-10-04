@@ -3,7 +3,6 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,23 +12,21 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - name: Restore sources from payload
+      - name: Restore project from ci_payload
         run: |
           python3 << 'PY'
-          import base64, pathlib, tarfile, io, os
-          parts = sorted(pathlib.Path(".").glob("payload_part*.txt"))
+          import base64, pathlib, tarfile, io
+          parts = sorted(pathlib.Path("ci_payload").glob("p*.b64"))
           if not parts:
-              print("No payload, using checked-out tree")
-          else:
-              b64 = "".join(p.read_text().strip() for p in parts)
-              data = base64.b64decode(b64)
-              with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
-                  tar.extractall(".")
-              print("Extracted", len(data), "bytes from", len(parts), "parts")
+              raise SystemExit("no ci_payload parts")
+          b64 = "".join(p.read_text().strip() for p in parts)
+          data = base64.b64decode(b64)
+          with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
+              tar.extractall(".")
+          print("restored", len(data), "bytes from", len(parts), "parts")
           PY
           pip install pillow -q
           python3 tools/gen_textures.py
-          ls -la src/main/resources/assets/satlink/textures/block/ | head
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.12"
